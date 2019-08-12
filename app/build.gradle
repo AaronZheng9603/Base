@@ -1,0 +1,110 @@
+if (rootProject.ext.buildMode["isApk"]) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+
+    resourcePrefix "base_"
+
+    defaultConfig {
+        if (rootProject.ext.buildMode["isApk"]) {
+            applicationId "com.aaron.baselib"
+        }
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile     file("aaron.jks")
+            storePassword "mm123book"
+            keyAlias      "Aaron"
+            keyPassword   "mm123book"
+        }
+    }
+
+    buildTypes {
+        release {
+            buildConfigField("boolean", "DEBUG_MODE", "false")
+
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            buildConfigField("boolean", "DEBUG_MODE", "true")
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+        main {
+            if (rootProject.ext.buildMode["isApk"]) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                res.srcDirs = [
+                        'src/main/res/release',
+                        'src/main/res/debug',
+                        'src/main/res'
+                ]
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                res.srcDirs = [
+                        'src/main/res/release',
+                        'src/main/res'
+                ]
+                java {
+                    exclude '/debug/**'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.blankj:utilcodex:1.23.7'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    implementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.3.0'
+    implementation 'com.tencent.sonic:sdk:3.1.0'
+}
