@@ -77,8 +77,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'com.blankj:utilcodex:1.23.7'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
@@ -91,6 +90,8 @@ dependencies {
     implementation 'com.jaeger.statusbaruitl:library:1.3.2'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.3.0'
+
+    api 'com.blankj:utilcodex:1.23.7'
 }
 
 //项目主页
@@ -106,7 +107,7 @@ def libName = "Base"
 //compile 'com.ssy.fireworkstextview:fireworkstextview:1.0.0'
 group = "com.aaron"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.0.0"
+version = "1.0.1"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'me.songning.CircleView:library:1.0.0'
 
 //生成源文件
@@ -188,7 +189,7 @@ bintray {
         //发布到JCenter上的项目名字
         name = libName
         //项目描述
-        desc = 'Base'
+        desc = 'A base library'
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

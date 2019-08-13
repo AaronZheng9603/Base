@@ -12,7 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import androidx.annotation.IntDef;
 import com.aaron.base.base.BaseActivity;
-import com.aaron.base.util.StringUtil;
+import com.blankj.utilcode.util.StringUtils;
 import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
 import com.tencent.sonic.sdk.SonicSession;
@@ -95,7 +95,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
         Intent intent = getIntent();
         String url = url();
         int mode = mode();
-        if (StringUtil.isEmpty(url)) {
+        if (StringUtils.isEmpty(url)) {
             if (mode != DEFAULT && mode != SONIC) {
                 finish();
                 return;
