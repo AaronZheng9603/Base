@@ -6,10 +6,6 @@ if (rootProject.ext.buildMode["isApk"]) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-//添加这两行
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -35,31 +31,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    signingConfigs {
-        release {
-            storeFile file("aaron.jks")
-            storePassword "mm123book"
-            keyAlias "Aaron"
-            keyPassword "mm123book"
-        }
-    }
-
     buildTypes {
         release {
-            buildConfigField("boolean", "DEBUG_MODE", "false")
-
-            minifyEnabled false
-//            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-        }
-
-        debug {
-            buildConfigField("boolean", "DEBUG_MODE", "true")
-
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 
