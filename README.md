@@ -4,4 +4,4 @@
 - 自用基础库，包含网络请求，图像加载，工具类，WebView模板等
 
 - Gradle 直接依赖
-- `implementation 'com.aaron:base:1.0.0'`
+- `implementation 'com.aaron:base:latest-version'`
