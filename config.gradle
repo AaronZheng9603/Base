@@ -1,5 +1,5 @@
 ext {
     buildMode = [
-            isApk : true
+            isApk : false
     ]
 }

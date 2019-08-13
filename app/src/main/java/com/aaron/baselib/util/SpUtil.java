@@ -21,16 +21,32 @@ public final class SpUtil {
         SPStaticUtils.put(key, value);
     }
 
-    public static int getInt(String key) {
-        return SPStaticUtils.getInt(key);
+    public static void put(String key, float value) {
+        SPStaticUtils.put(key, value);
     }
 
-    public static boolean getBoolean(String key) {
-        return SPStaticUtils.getBoolean(key);
+    public static void put(String key, long value) {
+        SPStaticUtils.put(key, value);
     }
 
-    public static String getString(String key) {
-        return SPStaticUtils.getString(key);
+    public static int getInt(String key, int defaultValue) {
+        return SPStaticUtils.getInt(key, defaultValue);
+    }
+
+    public static boolean getBoolean(String key, boolean defaultValue) {
+        return SPStaticUtils.getBoolean(key, defaultValue);
+    }
+
+    public static String getString(String key, String defaultValue) {
+        return SPStaticUtils.getString(key, defaultValue);
+    }
+
+    public static float getFloat(String key, float defaultValue) {
+        return SPStaticUtils.getFloat(key, defaultValue);
+    }
+
+    public static long getLong(String key, long defaultValue) {
+        return SPStaticUtils.getLong(key, defaultValue);
     }
 
     public static void remove(String key) {

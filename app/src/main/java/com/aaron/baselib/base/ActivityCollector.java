@@ -30,6 +30,18 @@ public final class ActivityCollector {
         }
     }
 
+    public static int getCount() {
+        return sActivities.size();
+    }
+
+    public static Activity getTop() {
+        return sActivities.isEmpty() ? null : sActivities.get(sActivities.size() - 1);
+    }
+
+    public static Activity getBottom() {
+        return sActivities.isEmpty() ? null : sActivities.get(0);
+    }
+
     private ActivityCollector() {
 
     }

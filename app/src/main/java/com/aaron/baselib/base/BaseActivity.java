@@ -29,13 +29,13 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityCollector.addActivity(this);
+//        ActivityCollector.addActivity(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityCollector.removeActivity(this);
+//        ActivityCollector.removeActivity(this);
     }
 
     @Override

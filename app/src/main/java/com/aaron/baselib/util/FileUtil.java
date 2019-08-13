@@ -13,9 +13,8 @@ import android.provider.MediaStore;
 import androidx.core.content.FileProvider;
 import com.blankj.utilcode.util.FileUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
 
 /**
  * @author Aaron
@@ -34,8 +33,8 @@ public final class FileUtil {
         context.sendBroadcast(intent);
     }
 
-    public static boolean isFileExists(String path) {
-        return FileUtils.isFileExists(path);
+    public static boolean isFileExists(File file) {
+        return FileUtils.isFileExists(file);
     }
 
     public static Uri getUri(Context context, String authority, File file) {
@@ -85,28 +84,98 @@ public final class FileUtil {
         return path;
     }
 
-    public static String saveBitmap(Bitmap bitmap, String path) throws IOException {
+    public static boolean saveBitmap(Bitmap bitmap, String path) {
+        boolean success = false;
         File file = new File(path);
-        if (isFileExists(path)) file.delete();
-        FileOutputStream out = new FileOutputStream(file);
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-        out.flush();
-        out.close();
-        return path;
+        if (isFileExists(new File(path))) file.delete();
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            success = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
     }
 
-    public static void deleteFile(File file) {
-        if (file.exists()) {
-            if (file.isFile()) {
-                file.delete();
-            } else if (file.isDirectory()) {
-                File[] files = file.listFiles();
-                for (int i = 0; i < files.length; i++) {
-                    deleteFile(files[i]);
-                }
+    public static boolean deleteFile(File file) {
+        return FileUtils.deleteFile(file);
+    }
+
+    public static boolean rename(File file, String newName) {
+        return FileUtils.rename(file, newName);
+    }
+
+    public static boolean copyFile(File srcFile, File destFile) {
+        return FileUtils.copyFile(srcFile, destFile);
+    }
+
+    public static boolean moveFile(File srcFile, File destFile) {
+        return FileUtils.moveFile(srcFile, destFile);
+    }
+
+    public static boolean copyDir(File srcFile, File destFile) {
+        return FileUtils.copyDir(srcFile, destFile);
+    }
+
+    public static boolean moveDir(File srcFile, File destFile) {
+        return FileUtils.moveDir(srcFile, destFile);
+    }
+
+    public static boolean deleteDir(File file) {
+        return FileUtils.deleteDir(file);
+    }
+
+    /**
+     * 遍历
+     *
+     * @param file        目标
+     * @param isRecursive 是否递归遍历子目录
+     * @return            List of File
+     */
+    public static List<File> listFilesInDir(File file, boolean isRecursive) {
+        return FileUtils.listFilesInDir(file, isRecursive);
+    }
+
+    public static boolean saveFile(File srcFile, File destFile) {
+        boolean success = false;
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(srcFile);
+            os = new FileOutputStream(destFile);
+            BufferedInputStream bis = new BufferedInputStream(is);
+            BufferedOutputStream bos = new BufferedOutputStream(os);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = bis.read(buffer, 0, buffer.length)) != -1) {
+                bos.write(buffer, 0, length);
             }
-            file.delete();
+            success = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (is != null) is.close();
+                if (os != null) {
+                    os.flush();
+                    os.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        return success;
     }
 
     private FileUtil() {

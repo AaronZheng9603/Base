@@ -6,6 +6,10 @@ if (rootProject.ext.buildMode["isApk"]) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+//添加这两行
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -33,10 +37,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile     file("aaron.jks")
+            storeFile file("aaron.jks")
             storePassword "mm123book"
-            keyAlias      "Aaron"
-            keyPassword   "mm123book"
+            keyAlias "Aaron"
+            keyPassword "mm123book"
         }
     }
 
@@ -44,8 +48,8 @@ android {
         release {
             buildConfigField("boolean", "DEBUG_MODE", "false")
 
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+//            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -75,7 +79,7 @@ android {
                         'src/main/res'
                 ]
                 java {
-                    exclude '/debug/**'
+                    exclude '/debug/base/**'
                 }
             }
         }
@@ -89,7 +93,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'androidx.core:core-ktx:1.0.2'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.31"
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -102,9 +106,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
-    implementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
-    implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.3.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
     implementation 'com.tencent.sonic:sdk:3.1.0'
+    implementation 'com.jaeger.statusbaruitl:library:1.3.2'
+    implementation 'com.orhanobut:logger:2.2.0'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.3.0'
 }
