@@ -116,7 +116,7 @@ public class SonicRuntimeImpl extends SonicRuntime {
 
     @Override
     public File getSonicCacheDir() {
-        if (BuildConfig.DEBUG_MODE) {
+        if (BuildConfig.DEBUG) {
             String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "sonic/";
             File file = new File(path.trim());
             if(!file.exists()){
