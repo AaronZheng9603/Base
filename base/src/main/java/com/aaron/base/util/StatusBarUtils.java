@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import androidx.annotation.IntRange;
 import androidx.annotation.RequiresApi;
 
-public class StatusBarUtil {
+public class StatusBarUtils {
 
     public static void setColor(Activity activity, int color, int statusBarAlpha) {
         com.jaeger.library.StatusBarUtil.setColor(activity, color, statusBarAlpha);

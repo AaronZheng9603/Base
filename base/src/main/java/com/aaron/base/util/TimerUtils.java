@@ -19,9 +19,9 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Aaron aaronzheng9603@gmail.com
  */
-public final class TimerUtil {
+public final class TimerUtils {
 
-    private static final String TAG = "TimerUtil";
+    private static final String TAG = "TimerUtils";
 
     private Disposable mDisp;
     private Listener mListener;
@@ -67,7 +67,7 @@ public final class TimerUtil {
                 });
     }
 
-    public TimerUtil() {
+    public TimerUtils() {
 
     }
 
