@@ -20,10 +20,10 @@ import androidx.fragment.app.FragmentTransaction;
  */
 public abstract class BaseFragment extends Fragment implements View.OnTouchListener, IBaseFragment {
 
-    @AnimRes @AnimatorRes private static int sEnter;
-    @AnimRes @AnimatorRes private static int sExit;
-    @AnimRes @AnimatorRes private static int sPopEnter;
-    @AnimRes @AnimatorRes private static int sPopExit;
+    @AnimRes @AnimatorRes private static int sEnter    = -1;
+    @AnimRes @AnimatorRes private static int sExit     = -1;
+    @AnimRes @AnimatorRes private static int sPopEnter = -1;
+    @AnimRes @AnimatorRes private static int sPopExit  = -1;
 
     @Nullable protected BaseActivity mActivity;
     protected FragmentManager mFragmentManager;
@@ -38,7 +38,7 @@ public abstract class BaseFragment extends Fragment implements View.OnTouchListe
      */
     public static void addFragment(FragmentManager manager, Fragment fragment, int containerId) {
         FragmentTransaction transaction = manager.beginTransaction();
-        if (sEnter != 0 && sExit != 0 && sPopEnter != 0 && sPopExit != 0) {
+        if (sEnter != -1 || sExit != -1 || sPopEnter != -1 || sPopExit != -1) {
             transaction.setCustomAnimations(sEnter, sExit, sPopEnter, sPopExit);
         }
         transaction.add(containerId, fragment)

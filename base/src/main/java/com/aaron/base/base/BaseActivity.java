@@ -3,9 +3,7 @@ package com.aaron.base.base;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Bundle;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -22,19 +20,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     private boolean mForbidScaleTextSize;
-    private int mStartEnterAnim, mStartExitAnim, mFinishEnterAnim, mFinishExitAnim;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        ActivityCollector.addActivity(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        ActivityCollector.removeActivity(this);
-    }
+    private int mStartEnterAnim  = -1;
+    private int mStartExitAnim   = -1;
+    private int mFinishEnterAnim = -1;
+    private int mFinishExitAnim  = -1;
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
@@ -64,16 +53,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     public void startActivity(Intent intent) {
         super.startActivity(intent);
         // 指定入场动画
-        if (mStartEnterAnim != 0 && mStartExitAnim != 0) {
+        if (mStartEnterAnim != -1 || mStartExitAnim != -1) {
             overridePendingTransition(mStartEnterAnim, mStartExitAnim);
         }
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public void finish() {
+        super.finish();
         // 指定退场动画
-        if (mFinishEnterAnim != 0 && mFinishExitAnim != 0) {
+        if (mFinishEnterAnim != -1 || mFinishExitAnim != -1) {
             overridePendingTransition(mFinishEnterAnim, mFinishExitAnim);
         }
     }
