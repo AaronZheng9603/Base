@@ -1,6 +1,5 @@
 package com.aaron.base.base;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import androidx.annotation.NonNull;
@@ -20,10 +19,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     private boolean mForbidScaleTextSize;
-    private int mStartEnterAnim  = -1;
-    private int mStartExitAnim   = -1;
-    private int mFinishEnterAnim = -1;
-    private int mFinishExitAnim  = -1;
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
@@ -50,37 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     @Override
-    public void startActivity(Intent intent) {
-        super.startActivity(intent);
-        // 指定入场动画
-        if (mStartEnterAnim != -1 || mStartExitAnim != -1) {
-            overridePendingTransition(mStartEnterAnim, mStartExitAnim);
-        }
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        // 指定退场动画
-        if (mFinishEnterAnim != -1 || mFinishExitAnim != -1) {
-            overridePendingTransition(mFinishEnterAnim, mFinishExitAnim);
-        }
-    }
-
-    @Override
     public void forbidScaleTextSize(boolean yes) {
         mForbidScaleTextSize = yes;
-    }
-
-    @Override
-    public void startAnim(int enterAnim, int exitAnim) {
-        mStartEnterAnim = enterAnim;
-        mStartExitAnim = exitAnim;
-    }
-
-    @Override
-    public void finishAnim(int enterAnim, int exitAnim) {
-        mFinishEnterAnim = enterAnim;
-        mFinishExitAnim = exitAnim;
     }
 }

@@ -2,6 +2,7 @@ package com.aaron.base.http;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.aaron.base.callback.HttpCallback;
 import okhttp3.*;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -88,12 +89,6 @@ public final class HttpUtil {
             }
         });
         return iCall;
-    }
-
-    public interface HttpCallback<T> {
-        void onSuccess(T t);
-
-        void onFailure(Throwable e);
     }
 
     /**

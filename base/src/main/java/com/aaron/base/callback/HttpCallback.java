@@ -4,5 +4,5 @@ public interface HttpCallback<T> {
 
     void onSuccess(T t);
 
-    void onFailure(String err);
+    void onFailure(Throwable e);
 }
