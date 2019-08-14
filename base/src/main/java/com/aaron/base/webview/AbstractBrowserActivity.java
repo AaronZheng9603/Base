@@ -155,7 +155,7 @@ public abstract class AbstractBrowserActivity extends BaseActivity {
         }
     }
 
-    @Target(ElementType.METHOD)
+    @Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
     @IntDef({DEFAULT, SONIC})
     public @interface Mode {
 
