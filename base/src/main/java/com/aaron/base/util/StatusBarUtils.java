@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.WindowManager;
 import androidx.annotation.IntRange;
 import androidx.annotation.RequiresApi;
+import com.jaeger.library.StatusBarUtil;
 
-public class StatusBarUtils {
+public final class StatusBarUtils {
 
     public static void setColor(Activity activity, int color, int statusBarAlpha) {
-        com.jaeger.library.StatusBarUtil.setColor(activity, color, statusBarAlpha);
+        StatusBarUtil.setColor(activity, color, statusBarAlpha);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -75,5 +76,9 @@ public class StatusBarUtils {
         // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return context.getResources().getDimensionPixelSize(resourceId);
+    }
+
+    private StatusBarUtils() {
+
     }
 }

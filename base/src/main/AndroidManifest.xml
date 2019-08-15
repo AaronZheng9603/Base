@@ -3,7 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.aaron.base" >
 
-    <application android:networkSecurityConfig="@xml/base_network_security_config"
+    <application
+            android:networkSecurityConfig="@xml/base_network_security_config"
                  tools:targetApi="n" />
 
 </manifest>

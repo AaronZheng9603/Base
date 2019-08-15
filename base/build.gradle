@@ -70,8 +70,7 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    implementation 'com.jaeger.statusbaruitl:library:1.3.2'
-
+    api 'com.jaeger.statusbaruitl:library:1.3.2'
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     api 'com.squareup.retrofit2:retrofit:2.5.0'
@@ -88,9 +87,9 @@ dependencies {
 }
 
 //项目主页
-def siteUrl = 'https://github.com/AaronZheng9603/Base'
+def siteUrl = 'https://github.com/Aaronzzx/Base'
 //项目的git地址
-def gitUrl = 'https://github.com/AaronZheng9603/Base.git'
+def gitUrl = 'https://github.com/Aaronzzx/Base.git'
 //发布到JCenter上的项目名字
 def libName = "Base"
 
@@ -100,7 +99,7 @@ def libName = "Base"
 //compile 'com.ssy.fireworkstextview:fireworkstextview:1.0.0'
 group = "com.aaron"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.1.0"
+version = "1.1.2"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'me.songning.CircleView:library:1.0.0'
 
 //生成源文件
