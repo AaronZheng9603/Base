@@ -16,5 +16,6 @@ public class SecondActivity extends AppCompatActivity {
                 .asBitmap()
                 .load(R.drawable.app_img_wallpaper)
                 .into(iv);
+
     }
 }
