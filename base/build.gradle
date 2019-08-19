@@ -70,17 +70,17 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    api 'com.jaeger.statusbaruitl:library:1.3.2'
+    implementation 'com.jaeger.statusbaruitl:library:1.3.2'
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     api 'com.squareup.retrofit2:retrofit:2.5.0'
-    api 'com.squareup.retrofit2:converter-gson:2.5.0'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-    api 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
-    api 'com.tencent.sonic:sdk:3.1.0'
+    implementation 'com.tencent.sonic:sdk:3.1.0'
     api 'com.uber.autodispose:autodispose-android-archcomponents:1.3.0'
 
     api 'com.blankj:utilcodex:1.23.7'
@@ -99,7 +99,7 @@ def libName = "Base"
 //compile 'com.ssy.fireworkstextview:fireworkstextview:1.0.0'
 group = "com.aaron"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.1.2-beta1"
+version = "1.1.5-beta1"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'me.songning.CircleView:library:1.0.0'
 
 //生成源文件
