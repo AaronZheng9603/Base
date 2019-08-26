@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.ImageView;
+
 import androidx.annotation.DrawableRes;
+import androidx.annotation.FloatRange;
 
 import java.io.File;
 
@@ -28,6 +30,9 @@ public abstract class ImageOption {
     protected Drawable mPlaceholder;
     protected int mErrorId;
     protected Drawable mError;
+
+    protected float mSizeMultiplier;
+    protected String mThumbnailUrl;
 
     protected int mResizeX;
     protected int mResizeY;
@@ -64,6 +69,8 @@ public abstract class ImageOption {
 
         this.mCrossFadeDuration = builder.crossFadeDuration;
 
+        this.mSizeMultiplier = builder.sizeMultiplier;
+        this.mThumbnailUrl = builder.thumbnailUrl;
         this.mResizeX = builder.resizeX;
         this.mResizeY = builder.resizeY;
 
@@ -146,6 +153,14 @@ public abstract class ImageOption {
         return mCrossFadeDuration;
     }
 
+    public float getSizeMultiplier() {
+        return mSizeMultiplier;
+    }
+
+    public String getThumbnailUrl() {
+        return mThumbnailUrl;
+    }
+
     public int getResizeX() {
         return mResizeX;
     }
@@ -195,6 +210,9 @@ public abstract class ImageOption {
         protected int errorId;
         protected Drawable error;
         protected int crossFadeDuration;
+
+        protected float sizeMultiplier;
+        protected String thumbnailUrl;
 
         protected int resizeX;
         protected int resizeY;
@@ -284,6 +302,16 @@ public abstract class ImageOption {
 
         public Builder crossFade(int duration) {
             this.crossFadeDuration = duration;
+            return actualBuilder();
+        }
+
+        public Builder thumbnail(@FloatRange(from = 0.0, to = 1.0) float sizeMultiplier) {
+            this.sizeMultiplier = sizeMultiplier;
+            return actualBuilder();
+        }
+
+        public Builder thumbnail(String thumbnailUrl) {
+            this.thumbnailUrl = thumbnailUrl;
             return actualBuilder();
         }
 

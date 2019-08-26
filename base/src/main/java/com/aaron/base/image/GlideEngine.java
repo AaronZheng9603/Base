@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+
 import androidx.annotation.Nullable;
+
+import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
@@ -37,18 +40,26 @@ final class GlideEngine implements ImageEngine<DefaultOption> {
         RequestManager manager = Glide.with(context);
         if (option.asFile()) {
             RequestBuilder<File> builder = setListener(manager.asFile(), option);
-            request(builder, option);
+            request(context, builder, option);
         } else if (option.asGif()) {
             RequestBuilder<GifDrawable> builder = setListener(manager.asGif(), option);
-            request(builder, option);
+            request(context, builder, option);
         } else if (option.asBitmap()) {
             int crossFadeDuration = option.getCrossFadeDuration();
             RequestBuilder<Bitmap> builder = setListener(manager.asBitmap(), option);
-            request(builder.transition(BitmapTransitionOptions.withCrossFade(crossFadeDuration)), option);
+            if (crossFadeDuration != 0) {
+                request(context, builder.transition(BitmapTransitionOptions.withCrossFade(crossFadeDuration)), option);
+            } else {
+                request(context, builder, option);
+            }
         } else {
             int crossFadeDuration = option.getCrossFadeDuration();
             RequestBuilder<Drawable> builder = setListener(manager.asDrawable(), option);
-            request(builder.transition(DrawableTransitionOptions.withCrossFade(crossFadeDuration)), option);
+            if (crossFadeDuration != 0) {
+                request(context, builder.transition(DrawableTransitionOptions.withCrossFade(crossFadeDuration)), option);
+            } else {
+                request(context, builder, option);
+            }
         }
     }
 
@@ -98,7 +109,8 @@ final class GlideEngine implements ImageEngine<DefaultOption> {
         });
     }
 
-    private <T> void request(RequestBuilder<T> builder, DefaultOption option) {
+    @SuppressWarnings("unchecked")
+    private <T> void request(Context context, RequestBuilder<T> builder, DefaultOption option) {
         String string           = option.getString();
         Bitmap bitmap           = option.getBitmap();
         File file               = option.getFile();
@@ -109,6 +121,8 @@ final class GlideEngine implements ImageEngine<DefaultOption> {
         Drawable placeholder    = option.getPlaceholder();
         int errorId             = option.getErrorId();
         Drawable error          = option.getError();
+        float sizeMultiplier    = option.getSizeMultiplier();
+        String thumbnailUrl     = option.getThumbnailUrl();
         int resizeX             = option.getResizeX();
         int resizeY             = option.getResizeY();
         boolean skipMemoryCache = option.isSkipMemoryCache();
@@ -141,6 +155,12 @@ final class GlideEngine implements ImageEngine<DefaultOption> {
             builder = builder.error(errorId);
         } else if (error != null) {
             builder = builder.error(error);
+        }
+
+        if (!StringUtils.isEmpty(thumbnailUrl)) {
+            builder = builder.thumbnail((RequestBuilder<T>) Glide.with(context).load(thumbnailUrl));
+        } else if (sizeMultiplier != 0.0F) {
+            builder = builder.thumbnail(sizeMultiplier);
         }
 
         if (resizeX != 0 || resizeY != 0) {
